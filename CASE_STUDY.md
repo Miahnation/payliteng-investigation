@@ -498,6 +498,6 @@ Every rule, command, and finding in this repository was tested live in the class
 
 
 **Author:** Akorita-Ifeanyichukwu Nehemiah  
-Co-Facilitator, TechRise 3.0 — Abia Cohort 3.0, 2026  
+Facilitator, TechRise 3.0 — Abia Cohort 3.0, 2026  
 
 [LinkedIn](www.linkedin.com/in/akorita-nehemiah-21aab8223) · [Blog](https://www.blogger.com/blog/posts/3275027532616772935) · [Twitter/X](https://x.com/Nehemia17303777)
