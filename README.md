@@ -172,3 +172,4 @@ This investigation was developed as the backbone of the **TechRise 3.0 Cybersecu
 
 **Author:** Akorita-Ifeanyichukwu Nehemiah  
 **LinkedIn:** [Connect](www.linkedin.com/in/akorita-nehemiah-21aab8223) · **Blog:** [Read](https://www.blogger.com/blog/posts/3275027532616772935) · **Twitter:** [Follow](https://x.com/Nehemia17303777)
+[Read the full case study →](CASE_STUDY.md)
