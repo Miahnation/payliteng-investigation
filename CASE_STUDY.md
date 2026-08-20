@@ -6,7 +6,6 @@
 > **Framework:** NIST SP 800-61 · MITRE ATT&CK · OWASP Top 10  
 > **Author:** Akorita-Ifeanyichukwu Nehemiah
 
----
 
 ## Overview
 
@@ -18,7 +17,6 @@ The attack was not discovered until January 20 — seven days later.
 
 This case study documents the complete investigation: how the attack happened, what evidence was recovered, how the detection stack would have caught it in seconds, and what needed to change to prevent recurrence.
 
----
 
 ## Company Profile
 
@@ -31,7 +29,6 @@ This case study documents the complete investigation: how the attack happened, w
 | Stack | PHP / MySQL / Apache 2.2.8 / vsftpd 2.3.4 / Linux |
 | Regulatory obligations | NDPC (Nigeria Data Protection Act 2023) · CBN Cybersecurity Framework |
 
----
 
 ## The Attack Chain
 
@@ -54,7 +51,6 @@ Before the attack started in earnest, the attacker spent approximately 60 second
 
 **ATT&CK Technique:** T1595 — Active Scanning
 
----
 
 ### Phase 2 — Initial Access Attempt: SSH Brute Force (03:47 AM)
 
@@ -77,7 +73,6 @@ Jan 13 03:47:34 payliteng sshd[1234]: Failed password for root from 185.220.101.
 
 **ATT&CK Technique:** T1110.001 — Brute Force: Password Guessing
 
----
 
 ### Phase 3 — Initial Access: Anonymous FTP (03:51 AM)
 
@@ -108,7 +103,6 @@ No authentication. No password. Nothing.
 - T1005 — Data from Local System
 - T1048.003 — Exfiltration Over Unencrypted Protocol
 
----
 
 ### Phase 4 — Exploitation: Root Shell via vsftpd Backdoor (03:52 AM)
 
@@ -124,7 +118,6 @@ msf6 exploit(unix/ftp/vsftpd_234_backdoor) > run
 
 Three commands. Root access. A vulnerability that has been public knowledge since 2011.
 
----
 
 ### Phase 5 — Credential Access (03:53 AM)
 
@@ -141,7 +134,6 @@ cat /etc/shadow
 
 These hashes can be cracked offline using hashcat. Every account on the server is now at risk.
 
----
 
 ### Phase 6 — Persistence: Cron Backdoor (03:54 AM)
 
@@ -171,7 +163,6 @@ The script was then deleted from the filesystem — but not from the disk. Foren
 - T1070 — Indicator Removal (deleted the script)
 - T1071 — Application Layer Protocol (C2 callback)
 
----
 
 ### The Second Attacker (09:15 AM)
 
@@ -187,7 +178,6 @@ While the first attacker had already exfiltrated data, a second IP attempted SQL
 **ATT&CK Technique:** T1190 — Exploit Public-Facing Application  
 **OWASP Category:** A03 — Injection
 
----
 
 ## What the Log Analysis Revealed
 
@@ -208,7 +198,6 @@ grep -i "union\|select\|insert\|drop" /var/log/apache2/access.log | grep "203.0.
 awk '{print $1, $2, $3, $NF}' auth.log | grep "185.220.101.47" | sort -k3
 ```
 
----
 
 ## Building the Detection Stack
 
@@ -371,7 +360,6 @@ python3 ~/volatility3/vol.py -f memory.lime linux.netstat.Netstat
 
 **The attacker was still connected when memory was captured.** Both the SSH session and the C2 callback are visible in RAM — two more independent evidence sources pointing to the same IP.
 
----
 
 ## MITRE ATT&CK Full Mapping
 
@@ -388,7 +376,6 @@ python3 ~/volatility3/vol.py -f memory.lime linux.netstat.Netstat
 | 9 | Defence Evasion | Indicator Removal | T1070 | backdoor.sh deleted — recovered |
 | 10 | C2 | Application Layer Protocol | T1071 | Memory forensics — curl process |
 
----
 
 ## Regulatory Impact
 
@@ -407,7 +394,6 @@ Deadline:  January 15, 2025 — MISSED by 5 days
 
 This is the business case for SIEM in a single paragraph.
 
----
 
 ## The Remediation: From Victim to DevSecOps
 
@@ -445,7 +431,6 @@ All pass → Deploy    Any fail → BLOCKED
 
 **The vsftpd 2.3.4 vulnerability has been public since 2011. A dependency scanner would have caught it in under 5 seconds — before a single line of code reached the server.**
 
----
 
 ## Evidence Chain — All Sources Point to the Same Attacker
 
@@ -462,7 +447,6 @@ This is what makes the investigation robust:
 
 Five independent evidence sources. Same IP. Same attacker. Airtight case.
 
----
 
 ## Lessons Learned
 
@@ -500,7 +484,6 @@ The NDPC, CBN, and the reality of Nigerian fintech operations shape the risk lan
 | Threat Mapping | MITRE ATT&CK Navigator | Online |
 | Threat Intel | AbuseIPDB, AlienVault OTX | Online |
 
----
 
 ## About This Project
 
@@ -513,9 +496,8 @@ The PayliteNG scenario was designed to:
 
 Every rule, command, and finding in this repository was tested live in the classroom and refined based on actual student outcomes.
 
----
 
 **Author:** Akorita-Ifeanyichukwu Nehemiah  
 Co-Facilitator, TechRise 3.0 — Abia Cohort 3.0, 2026  
 
-[LinkedIn](#) · [Blog](#) · [Twitter/X](#)
+[LinkedIn](www.linkedin.com/in/akorita-nehemiah-21aab8223) · [Blog](https://www.blogger.com/blog/posts/3275027532616772935) · [Twitter/X](https://x.com/Nehemia17303777)
